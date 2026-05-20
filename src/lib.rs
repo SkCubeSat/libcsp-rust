@@ -142,7 +142,7 @@ impl From<CspPacketMut> for CspPacketRef {
 
 impl CspPacketRef {
     pub fn packet_data(&self) -> &[u8] {
-        unsafe { &(*self.0).packet_data_union.data[..self.packet_length()] }
+        unsafe { &(&(*self.0).packet_data_union.data)[..self.packet_length()] }
     }
 
     pub fn whole_data(&self) -> &[u8; ffi::CSP_BUFFER_SIZE] {
@@ -183,7 +183,7 @@ impl AsRef<CspPacketRef> for CspPacketRefGuard {
 
 impl CspPacketMut {
     pub fn packet_data(&self) -> &[u8] {
-        unsafe { &(*self.0).packet_data_union.data[..self.packet_length()] }
+        unsafe { &(&(*self.0).packet_data_union.data)[..self.packet_length()] }
     }
 
     pub fn whole_data(&self) -> &[u8; ffi::CSP_BUFFER_SIZE] {
